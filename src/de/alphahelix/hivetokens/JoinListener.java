@@ -54,9 +54,4 @@ public class JoinListener extends SimpleListener<HiveTokens, Register> {
                     names);
         }
     }
-
-    @EventHandler
-    public void test(EndercrystalClickEvent e) {
-        System.out.println("See it works!");
-    }
 }
