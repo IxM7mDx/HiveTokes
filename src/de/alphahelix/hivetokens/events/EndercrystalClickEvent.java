@@ -1,5 +1,6 @@
 package de.alphahelix.hivetokens.events;
 
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -11,9 +12,11 @@ public class EndercrystalClickEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private Player player;
+    private Location location;
 
-    public EndercrystalClickEvent(Player player) {
+    public EndercrystalClickEvent(Player player ,Location loc) {
         this.player = player;
+        this.location = loc;
     }
 
     /**
@@ -37,5 +40,9 @@ public class EndercrystalClickEvent extends Event {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 }

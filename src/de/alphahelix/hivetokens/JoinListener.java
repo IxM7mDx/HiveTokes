@@ -33,7 +33,7 @@ public class JoinListener extends SimpleListener<HiveTokens, Register> {
                     @Override
                     public boolean handle(Player p, Object packetPlayInUseEntity) {
                         if (HiveTokens.isEndercrystal(e.getPlayer())) {
-                            Bukkit.getPluginManager().callEvent(new EndercrystalClickEvent(e.getPlayer()));
+                            Bukkit.getPluginManager().callEvent(new EndercrystalClickEvent(e.getPlayer(), HiveTokens.getEndercrystal(e.getPlayer())));
                         }
                         return false;
                     }

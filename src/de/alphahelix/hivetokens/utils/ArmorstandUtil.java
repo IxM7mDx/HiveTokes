@@ -1,7 +1,6 @@
 package de.alphahelix.hivetokens.utils;
 
 import de.alphahelix.alphalibary.reflection.ReflectionUtil;
-import de.alphahelix.alphalibary.utils.Util;
 import de.alphahelix.hivetokens.EquipSlot;
 import de.alphahelix.hivetokens.HiveTokens;
 import de.alphahelix.hivetokens.Register;
@@ -13,11 +12,9 @@ import org.bukkit.inventory.ItemStack;
 /**
  * Created by AlphaHelixDev.
  */
-public class ArmorstandUtil extends Util<HiveTokens, Register> {
+public class ArmorstandUtil {
 
-    public ArmorstandUtil(HiveTokens plugin, Register register) {
-        super(plugin, register);
-    }
+    private static Class<?>[] param = {double.class, double.class, double.class, float.class, float.class};
 
     public static void spawnArmorstandForAll(Location loc, String name) {
         for (Player p : Bukkit.getOnlinePlayers()) {
@@ -27,19 +24,20 @@ public class ArmorstandUtil extends Util<HiveTokens, Register> {
 
     public static void spawnArmorstandForPlayer(Player p, Location loc, String name) {
         try {
-            Class<?>[] param = {double.class, double.class, double.class, float.class, float.class};
-            Object armorstand = ReflectionUtil.getNmsClass("EntityArmorStand")
-                    .getConstructor(ReflectionUtil.getNmsClass("World"))
-                    .newInstance(ReflectionUtil.getWorldServer(p.getWorld()));
+            Object armorstand = ReflectionUtil.getNmsClass("EntityArmorStand").getConstructor(ReflectionUtil.getNmsClass("World")).newInstance(ReflectionUtil.getWorldServer(p.getWorld()));
 
-            armorstand.getClass().getMethod("setLocation", param).invoke(armorstand, loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
-            armorstand.getClass().getMethod("setInvisible", boolean.class).invoke(armorstand, true);
-            armorstand.getClass().getMethod("setCustomName", String.class).invoke(armorstand, name);
-            armorstand.getClass().getMethod("setCustomNameVisible", boolean.class).invoke(armorstand, true);
+            ReflectionUtil.getNmsClass("EntityArmorStand").getMethod("setLocation", param)
+                    .invoke(armorstand, loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
+            ReflectionUtil.getNmsClass("EntityArmorStand").getMethod("setInvisible", boolean.class)
+                    .invoke(armorstand, true);
+            ReflectionUtil.getNmsClass("EntityArmorStand").getMethod("setCustomName", String.class)
+                    .invoke(armorstand, name);
+            ReflectionUtil.getNmsClass("EntityArmorStand").getMethod("setCustomNameVisible", boolean.class)
+                    .invoke(armorstand, true);
 
+            ReflectionUtil.sendPacket(p, ReflectionUtil.getNmsClass("PacketPlayOutSpawnEntityLiving").getConstructor(ReflectionUtil.getNmsClass("EntityLiving"))
+                    .newInstance(armorstand));
 
-            ReflectionUtil.sendPacket(p, ReflectionUtil.getNmsClass("PacketPlayOutSpawnEntityLiving")
-                    .getConstructor(ReflectionUtil.getNmsClass("EntityLiving")).newInstance(armorstand));
             Register.getArmorstandLocationsFile().addArmorstandToFile(loc, name);
             HiveTokens.addArmorstand(armorstand, loc);
         } catch (Exception e) {

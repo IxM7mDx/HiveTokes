@@ -31,17 +31,33 @@ public final class HiveTokens extends AlphaPlugin {
     }
 
     public static boolean isEndercrystal(Player p) {
-        for (int i = 0; i < 4; i++) {
-            for (Block b : p.getLineOfSight((Set<Material>) null, i)) {
-                for (Location l : getEndercrystals().values()) {
-                    if (b.getX() == l.getBlockX()
-                            && b.getY() == l.getBlockY()
-                            && b.getZ() == l.getBlockZ())
-                        return true;
-                }
+        for (Block b : p.getLineOfSight((Set<Material>) null, 4)) {
+            for (Location l : getEndercrystals().values()) {
+                if ((b.getX() == l.getBlockX()
+                        && b.getY() == l.getBlockY()
+                        && b.getZ() == l.getBlockZ()
+                        || (b.getX() == l.getBlockX()
+                        && b.getY() == (l.getBlockY() + 1)
+                        && b.getZ() == l.getBlockZ())))
+                    return true;
             }
         }
         return false;
+    }
+
+    public static Location getEndercrystal(Player p) {
+        for (Block b : p.getLineOfSight((Set<Material>) null, 4)) {
+            for (Location l : getEndercrystals().values()) {
+                if ((b.getX() == l.getBlockX()
+                        && b.getY() == l.getBlockY()
+                        && b.getZ() == l.getBlockZ()
+                        || (b.getX() == l.getBlockX()
+                        && b.getY() == (l.getBlockY() + 1)
+                        && b.getZ() == l.getBlockZ())))
+                    return l;
+            }
+        }
+        return null;
     }
 
 

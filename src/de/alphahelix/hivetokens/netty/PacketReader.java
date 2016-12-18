@@ -44,7 +44,7 @@ public class PacketReader {
                 out.add(packet);
             }
         };
-        pipe.addAfter("decoder", "alphaL", handle);
+        pipe.addAfter("decoder", "alphaListener", handle);
         return handle;
     }
 

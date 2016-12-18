@@ -2,6 +2,7 @@ package de.alphahelix.hivetokens;
 
 import de.alphahelix.hivetokens.files.ArmorstandLocationsFile;
 import de.alphahelix.hivetokens.files.EndercrystalLocationsFile;
+import de.alphahelix.hivetokens.utils.ArmorstandUtil;
 
 /**
  * Created by AlphaHelixDev.
@@ -33,5 +34,6 @@ public class Register {
         joinListener = new JoinListener(getHiveTokens(), this);
         armorstandLocationsFile = new ArmorstandLocationsFile(getHiveTokens());
         endercrystalLocationsFile = new EndercrystalLocationsFile(getHiveTokens());
+        new ArmorstandUtil();
     }
 }
