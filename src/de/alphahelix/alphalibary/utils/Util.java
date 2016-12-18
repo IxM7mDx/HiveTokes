@@ -4,7 +4,7 @@ import de.alphahelix.alphalibary.AlphaPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.List;
+import java.util.*;
 import java.util.logging.Logger;
 
 public class Util<P extends AlphaPlugin, R> {
@@ -66,5 +66,24 @@ public class Util<P extends AlphaPlugin, R> {
     @SuppressWarnings("unchecked")
     public <T> T[] makeArray(T... types) {
         return types;
+    }
+
+    public <T, E> Set<T> getKeysByValue(Map<T, E> map, E value) {
+        Set<T> keys = new HashSet<T>();
+        for (Map.Entry<T, E> entry : map.entrySet()) {
+            if (Objects.equals(value, entry.getValue())) {
+                keys.add(entry.getKey());
+            }
+        }
+        return keys;
+    }
+
+    public <T, E> T getKeyByValue(Map<T, E> map, E value) {
+        for (Map.Entry<T, E> entry : map.entrySet()) {
+            if (Objects.equals(value, entry.getValue())) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 }

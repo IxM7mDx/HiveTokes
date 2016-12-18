@@ -1,7 +1,7 @@
 package de.alphahelix.hivetokens.files;
 
 import de.alphahelix.alphalibary.file.SimpleFile;
-import de.alphahelix.hivetokens.HiveTokens;
+import de.alphahelix.hivetokens.FakeAPI;
 import org.bukkit.Location;
 
 import java.util.HashMap;
@@ -9,9 +9,9 @@ import java.util.HashMap;
 /**
  * Created by AlphaHelixDev.
  */
-public class EndercrystalLocationsFile extends SimpleFile<HiveTokens> {
+public class EndercrystalLocationsFile extends SimpleFile<FakeAPI> {
 
-    public EndercrystalLocationsFile(HiveTokens pl) {
+    public EndercrystalLocationsFile(FakeAPI pl) {
         super("plugins/HiveTokens", "endercrystallocations.ht", pl);
     }
 

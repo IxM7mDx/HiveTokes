@@ -1,7 +1,7 @@
 package de.alphahelix.hivetokens.files;
 
 import de.alphahelix.alphalibary.file.SimpleFile;
-import de.alphahelix.hivetokens.HiveTokens;
+import de.alphahelix.hivetokens.FakeAPI;
 import org.bukkit.Location;
 
 import java.util.HashMap;
@@ -9,9 +9,9 @@ import java.util.HashMap;
 /**
  * Created by AlphaHelixDev.
  */
-public class ArmorstandLocationsFile extends SimpleFile<HiveTokens> {
+public class ArmorstandLocationsFile extends SimpleFile<FakeAPI> {
 
-    public ArmorstandLocationsFile(HiveTokens pl) {
+    public ArmorstandLocationsFile(FakeAPI pl) {
         super("plugins/HiveTokens", "armorstandlocations.ht", pl);
     }
 

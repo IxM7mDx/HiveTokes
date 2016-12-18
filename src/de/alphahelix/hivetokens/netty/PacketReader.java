@@ -9,6 +9,7 @@ import io.netty.handler.codec.MessageToMessageDecoder;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,6 +18,8 @@ import java.util.List;
 public class PacketReader {
 
     private static Field channelField;
+
+    private static ArrayList<String> usedChannelsNames = new ArrayList<>();
 
     static {
         for (Field f : ReflectionUtil.getNmsClass("NetworkManager").getDeclaredFields()) {
@@ -28,7 +31,7 @@ public class PacketReader {
         }
     }
 
-    public ChannelHandler listen(final Player p, final PacketReceivingHandler handler) {
+    public ChannelHandler listen(final Player p, final PacketReceivingHandler handler, String channelName) {
         Channel ch = getNettyChannel(p);
         ChannelPipeline pipe = ch.pipeline();
 
@@ -44,7 +47,10 @@ public class PacketReader {
                 out.add(packet);
             }
         };
-        pipe.addAfter("decoder", "alphaListener", handle);
+        if (!usedChannelsNames.contains(channelName)) {
+            pipe.addAfter("decoder", channelName, handle);
+            usedChannelsNames.add(channelName);
+        }
         return handle;
     }
 
@@ -53,7 +59,7 @@ public class PacketReader {
             ChannelPipeline pipe = getNettyChannel(p).pipeline();
             pipe.remove(handler);
             return true;
-        } catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }

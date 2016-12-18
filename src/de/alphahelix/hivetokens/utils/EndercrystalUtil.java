@@ -1,8 +1,9 @@
 package de.alphahelix.hivetokens.utils;
 
 import de.alphahelix.alphalibary.reflection.ReflectionUtil;
-import de.alphahelix.hivetokens.HiveTokens;
+import de.alphahelix.hivetokens.FakeAPI;
 import de.alphahelix.hivetokens.Register;
+import de.alphahelix.hivetokens.instances.FakeEndercrystal;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -31,7 +32,7 @@ public class EndercrystalUtil {
                     .getConstructor(ReflectionUtil.getNmsClass("Entity"), int.class).newInstance(endercrystal, 51));
 
             Register.getEndercrystalLocationsFile().addEndercrystalToFile(loc, name);
-            HiveTokens.addEndercrystal(endercrystal, loc);
+            FakeAPI.addFakeEndercrystal(p, new FakeEndercrystal(loc, name, endercrystal));
         } catch (Exception e) {
             e.printStackTrace();
         }

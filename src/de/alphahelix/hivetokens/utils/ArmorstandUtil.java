@@ -2,8 +2,9 @@ package de.alphahelix.hivetokens.utils;
 
 import de.alphahelix.alphalibary.reflection.ReflectionUtil;
 import de.alphahelix.hivetokens.EquipSlot;
-import de.alphahelix.hivetokens.HiveTokens;
+import de.alphahelix.hivetokens.FakeAPI;
 import de.alphahelix.hivetokens.Register;
+import de.alphahelix.hivetokens.instances.FakeArmorstand;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -39,7 +40,7 @@ public class ArmorstandUtil {
                     .newInstance(armorstand));
 
             Register.getArmorstandLocationsFile().addArmorstandToFile(loc, name);
-            HiveTokens.addArmorstand(armorstand, loc);
+            FakeAPI.addFakeArmorstand(p, new FakeArmorstand(loc, name, armorstand));
         } catch (Exception e) {
             e.printStackTrace();
         }

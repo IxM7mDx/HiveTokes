@@ -1,6 +1,6 @@
 package de.alphahelix.hivetokens.events;
 
-import de.alphahelix.hivetokens.instances.FakeEndercrystal;
+import de.alphahelix.hivetokens.instances.FakePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -8,15 +8,15 @@ import org.bukkit.event.HandlerList;
 /**
  * Created by AlphaHelixDev.
  */
-public class EndercrystalClickEvent extends Event {
+public class PlayerClickEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private Player player;
-    private FakeEndercrystal fakeEndercrystal;
+    private FakePlayer fakePlayer;
 
-    public EndercrystalClickEvent(Player player ,FakeEndercrystal fakeEndercrystal) {
+    public PlayerClickEvent(Player player ,FakePlayer fakePlayer) {
         this.player = player;
-        this.fakeEndercrystal = fakeEndercrystal;
+        this.fakePlayer = fakePlayer;
     }
 
     /**
@@ -42,7 +42,8 @@ public class EndercrystalClickEvent extends Event {
         return player;
     }
 
-    public FakeEndercrystal getFakeEndercrystal() {
-        return fakeEndercrystal;
+    public FakePlayer getFakePlayer() {
+        return fakePlayer;
     }
+
 }
