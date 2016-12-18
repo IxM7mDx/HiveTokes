@@ -1,0 +1,4 @@
+name: HiveTokensAPI
+author: AlphaHelix
+version: 1.0
+main: de.alphahelix.hivetokens.HiveTokens
